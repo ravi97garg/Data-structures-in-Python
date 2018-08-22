@@ -32,17 +32,56 @@ class BSTree:
                     else:
                         root = root.right
 
+    def maxVal(self):
+        root = self.root
+        while root.right is not None:
+            root = root.right
+        return root.data
+
     def minVal(self):
         root = self.root
         while root.left is not None:
             root = root.left
         return root.data
 
-    def maxVal(self):
+    def search(self, key):
         root = self.root
-        while root.right is not None:
-            root = root.right
-        return root.data
+        while root is not None:
+            if key == root.data:
+                return 1
+            elif key > root.data:
+                root = root.right
+            else:
+                root = root.left
+        return 0
+
+    def remove(self,key):
+        remove(self.root, key)
+
+def remove(root, key):
+    if root is None:
+        return None
+    elif root.data > key:
+        root.left = remove(root.left, key)
+    elif root.data < key:
+        root.right = remove(root.right, key)
+    else:
+        if root.left is None:
+            temp = root.right
+            root = None
+            return temp
+        elif root.right is None:
+            temp = root.left
+            root = None
+            return temp
+        else:
+            root2 = root.left
+            while root2.right is not None:
+                root2 = root2.right
+            root.left = root2
+            root.data = root2.data
+            root.right = remove(root.right, root2.key)
+    return root
 
 
 def printBST(root):
@@ -58,7 +97,6 @@ if __name__ == "__main__":
     tree.insert(3)
     tree.insert(7)
     tree.insert(4)
-    print(tree.minVal())
-    print(tree.maxVal())
+    tree.remove(2)
     printBST(tree.root)
 
