@@ -58,6 +58,13 @@ class BSTree:
     def remove(self,key):
         remove(self.root, key)
 
+
+def printBST(root):
+    if root:
+        printBST(root.left)
+        print(root.data, end=" ")
+        printBST(root.right)
+
 def remove(root, key):
     if root is None:
         return None
@@ -82,13 +89,6 @@ def remove(root, key):
             root.data = root2.data
             root.right = remove(root.right, root2.key)
     return root
-
-
-def printBST(root):
-    if root:
-        printBST(root.left)
-        print(root.data, end=" ")
-        printBST(root.right)
 
 
 if __name__ == "__main__":
