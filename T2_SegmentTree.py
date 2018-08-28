@@ -4,25 +4,32 @@
 
 
 from math import log, ceil
-class SegmentTree:
+from abc import ABC, abstractmethod
+
+
+class SegmentTree(ABC):
     def __init__(self, arr):
         self.arr = arr
         self.size = 2 ** (ceil(log(len(self.arr), 2)) + 1) - 1
         self.tree = [None] * self.size
 
-    # Edit this `process` method as per your requirement
+    @abstractmethod
     def process(self, leftData, rightData):
-        return min(leftData, rightData)
+        pass
+
+    @abstractmethod
+    def leaf(self, index):
+        pass
 
     def buildSegmentTree(self, start=None, end=None, index=0):
-        if start == None:
+        if start is None:
             start = 0
-        if end == None:
+        if end is None:
             end = len(self.arr) - 1
         if start > end or index >= self.size:
             return
         elif start == end:
-            self.tree[index] = self.arr[start]
+            self.tree[index] = self.leaf(start)  # self.arr[start]
         else:
             mid = (start + end) // 2
             self.buildSegmentTree(start, mid, index * 2 + 1)
@@ -40,9 +47,9 @@ class SegmentTree:
         return 4
 
     def getResult(self, queryStart, queryEnd, start=None, end=None, index=0):
-        if start == None:
+        if start is None:
             start = 0
-        if end == None:
+        if end is None:
             end = len(self.arr) - 1
         overlapValue = self.overlap(start, end, queryStart, queryEnd)
         mid = (start + end) // 2
@@ -57,9 +64,3 @@ class SegmentTree:
             right = self.getResult(queryStart, queryEnd, mid + 1, end, 2 * index + 2)
             return self.process(left, right)
         return None
-
-
-if __name__ == "__main__":
-    obj = SegmentTree([2, 3, 4, 5, 6, 7, 8, 9, 10])
-    obj.buildSegmentTree()
-    print(obj.getResult(2, 5))
