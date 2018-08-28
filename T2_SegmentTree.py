@@ -12,6 +12,7 @@ class SegmentTree(ABC):
         self.arr = arr
         self.size = 2 ** (ceil(log(len(self.arr), 2)) + 1) - 1
         self.tree = [None] * self.size
+        self.buildSegmentTree()
 
     @abstractmethod
     def process(self, leftData, rightData):

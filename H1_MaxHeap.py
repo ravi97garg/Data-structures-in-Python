@@ -138,10 +138,10 @@ class MaxHeap:
         for i in range(n//2, -1, -1):
             self.maxHeapify(i)
 
-    def isMaxHeap(self, arr):
-        return self.isMaxHeap2(arr, 0)
 
-    def isMaxHeap2(self, arr, index):
+    def isMaxHeap(self, arr = None, index = 0):
+        if arr is None:
+            arr = self.heap
         if index >= len(arr):
             return True
         leftIndex = index * 2 + 1
@@ -153,7 +153,7 @@ class MaxHeap:
         elif rightIndex < len(arr) and arr[rightIndex] > arr[index]:
             return False
         else:
-            return self.isMaxHeap2(arr, leftIndex) and self.isMaxHeap2(
+            return self.isMaxHeap(arr, leftIndex) and self.isMaxHeap(
                 arr, rightIndex)
 
     def getHeap(self):
@@ -162,4 +162,3 @@ class MaxHeap:
 if __name__ == "__main__":
     obj = MaxHeap([2, 31, 20, 22, 10, 24, 1, 4])
     print(obj.heapSort())
-    print(obj.getHeap())

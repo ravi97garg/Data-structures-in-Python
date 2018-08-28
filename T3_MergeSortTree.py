@@ -29,5 +29,4 @@ class MergeSortTree(SegmentTree):
 
 if __name__ == "__main__":
     obj = MergeSortTree([2, 4, 3, 6, 5, 8, 7])
-    obj.buildSegmentTree()
     print(obj.getResult(2, 5))
