@@ -1,6 +1,9 @@
+# Merge Sort Tree
+# Date Created: 29 August 2018
+# Created by Ravi garg
+
+
 from T2_SegmentTree import SegmentTree
-
-
 class MergeSortTree(SegmentTree):
     def __init__(self, arr):
         SegmentTree.__init__(self, arr)
