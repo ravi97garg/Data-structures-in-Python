@@ -1,4 +1,4 @@
-# Merge Sort Tree
+# Trie
 # Date Created: 30 August 2018
 # Created by Ravi garg
 
