@@ -1,3 +1,4 @@
+from copy import deepcopy
 class Trie:
     def __init__(self):
         self.numberOfWords = 0
@@ -62,10 +63,50 @@ class Trie:
         else:
             return True
 
+    def delete(self, word):
+        word = word.lower()
+        if not self.isCompleteWordPresent(word):
+            raise ValueError("Word not present")
+        else:
+            self.deleteWord(word, len(word), 0)
+            self.numberOfWords -= 1
+
+    def deleteWord(self, word, size, index, current=None):
+        if current is None:
+            current = self.root
+        if index == size:
+            current.isWordComplete = False
+            return len(current.character) == 0
+        else:
+            deletable = self.deleteWord(word, size, index + 1, current.character[word[index]])
+            if deletable:
+                self.root.numberOfWords -= 1
+                return len(current.character) == 0
+            else:
+                return False
+
+    def getLongestPrefix(self, word):
+        current = self.root
+        endIndex = 0
+        size = len(word)
+        for index in range(size):
+            letter = word[index]
+            if letter in current.character:
+                if current.isWordComplete:
+                    endindex = index
+                current = current.character[letter]
+            else:
+                break
+        if endIndex == 0:
+            return None
+        else:
+            return word[0:endIndex]
+
 
 obj = Trie()
 obj.insertWord('card')
 obj.insertWord('car')
 obj.insertWord('bike')
-print(obj.isCompleteWordPresent('Card'))
-print(obj.numberOfWordWithPrefix('cards'))
+print(obj.isCompleteWordPresent('card'))
+obj.delete('card')
+print(obj.isCompleteWordPresent('card'))
