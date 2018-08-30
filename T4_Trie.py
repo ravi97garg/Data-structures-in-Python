@@ -106,6 +106,7 @@ class Trie:
         else:
             return word[0:endIndex]
 
+
 if __name__ == "__main__":
     obj = Trie()
     obj.insertWord('card')
