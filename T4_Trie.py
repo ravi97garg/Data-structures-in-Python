@@ -1,4 +1,8 @@
-from copy import deepcopy
+# Merge Sort Tree
+# Date Created: 30 August 2018
+# Created by Ravi garg
+
+
 class Trie:
     def __init__(self):
         self.numberOfWords = 0
@@ -15,7 +19,7 @@ class Trie:
 
     def insertWord(self, word):
         word = word.lower()
-        current = self.root  # check if deep copy needed
+        current = self.root
         current.numberOfWords += 1
         size = len(word)
         for index in range(size):
@@ -102,11 +106,11 @@ class Trie:
         else:
             return word[0:endIndex]
 
-
-obj = Trie()
-obj.insertWord('card')
-obj.insertWord('car')
-obj.insertWord('bike')
-print(obj.isCompleteWordPresent('card'))
-obj.delete('card')
-print(obj.isCompleteWordPresent('card'))
+if __name__ == "__main__":
+    obj = Trie()
+    obj.insertWord('card')
+    obj.insertWord('car')
+    obj.insertWord('bike')
+    print(obj.isCompleteWordPresent('card'))
+    obj.delete('card')
+    print(obj.isCompleteWordPresent('card'))
