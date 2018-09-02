@@ -83,7 +83,7 @@ class Trie:
             return len(current.character) == 0
         else:
             deletable = self.deleteWord(word, size, index + 1, current.character[word[index]])
-            if deletable:
+            if deletable and not current.isWordComplete:
                 print(word)
                 self.root.numberOfWords -= 1
                 return len(current.character) == 0
@@ -115,4 +115,4 @@ if __name__ == "__main__":
     obj.insertWord('bike')
     print(obj.isCompleteWordPresent('card'))
     obj.delete('card')
-    print(obj.isCompleteWordPresent('car'))
+    print(obj.isCompleteWordPresent('card'))
