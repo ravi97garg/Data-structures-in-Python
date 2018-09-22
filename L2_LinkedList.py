@@ -183,6 +183,19 @@ class LinkedList(object):
                 else:
                     currentnode = currentnode.next
 
+    def removeDuplicates(self):
+        temp1 = self.head
+        temp2 = self.head.next
+        while temp2 is not None:
+            if temp1.data == temp2.data:
+                temp2 = temp2.next
+            else:
+                temp1.next = temp2
+                temp1 = temp2
+                temp2 = temp2.next
+        temp1.next = temp2
+        return self.head
+
     def print_list(self):
         nodeList = []
         currentnode = self.head
@@ -271,10 +284,13 @@ if __name__ == '__main__':
     node3 = Node(3)
     node4 = Node(4)
     node5 = Node(5)
+    node6 = Node(5)
     ll = LinkedList()
     ll.addNode(node1)
     ll.addNode(node2)
     ll.addNode(node3)
     ll.addNode(node4)
     ll.addNode(node5)
+    ll.addNode(node6)
+    ll.removeDuplicates()
     ll.print_list()
