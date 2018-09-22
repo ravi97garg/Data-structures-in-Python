@@ -70,6 +70,20 @@ class BSTree:
     def getRoot(self):
         return self.root
 
+    def levelOrder(self):
+        queue = [self.root]
+        self.__level(queue)
+
+    def __level(self, queue):
+        while len(queue):
+            current = queue[0]
+            if current.left is not None:
+                queue.append(current.left)
+            if current.right is not None:
+                queue.append(current.right)
+            queue = queue[1:]
+            print(current.data, sep=' ', end=' ')
+
 def printBST(root):
     if root:
         printBST(root.left)
@@ -110,5 +124,7 @@ if __name__ == "__main__":
     tree.insert(4)
     tree.insert(2)
     print('Height of the tree is', tree.longestPathlength(tree.getRoot()))
+    tree.levelOrder()
+    print()
     printBST(tree.root)
 
