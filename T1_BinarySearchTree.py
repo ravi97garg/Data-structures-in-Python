@@ -55,9 +55,20 @@ class BSTree:
                 root = root.left
         return 0
 
-    def remove(self,key):
+    def remove(self, key):
         remove(self.root, key)
 
+    def longestPathlength(self, root = None):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return 0
+        else:
+            count = 1 + max(self.longestPathlength(root.left), self.longestPathlength(root.right))
+        return count
+
+    def getRoot(self):
+        return self.root
 
 def printBST(root):
     if root:
@@ -97,6 +108,7 @@ if __name__ == "__main__":
     tree.insert(3)
     tree.insert(7)
     tree.insert(4)
-    tree.remove(2)
+    tree.insert(2)
+    print('Height of the tree is', tree.longestPathlength(tree.getRoot()))
     printBST(tree.root)
 
